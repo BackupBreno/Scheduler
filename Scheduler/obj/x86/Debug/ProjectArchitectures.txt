@@ -1,0 +1,1 @@
+C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\Scheduler.csproj;x86
