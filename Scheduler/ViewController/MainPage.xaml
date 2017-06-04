@@ -7,7 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Button" HorizontalAlignment="Left" Margin="204,150,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+    <Grid x:Name="layout_root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Button x:Name="Add_Process" Content="Adicionar Processo" HorizontalAlignment="Left" Margin="153,938,0,0" VerticalAlignment="Top" Click="Add_Process_Click"/>
+        <TextBox x:Name="input_process_name" HorizontalAlignment="Left" Margin="206,802,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="input_process_duration" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="206,839,0,0" Width="200"/>
+        <TextBox HorizontalAlignment="Left" Margin="38,802,0,0" TextWrapping="Wrap" Text="Nome do Processo:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+        <TextBox HorizontalAlignment="Left" Margin="38,839,0,0" TextWrapping="Wrap" Text="Duração:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+        <ListView x:Name="output_list_process" HorizontalAlignment="Left" Height="444" Margin="38,30,0,0" VerticalAlignment="Top" Width="576"/>
+        <Button x:Name="Simulation" Content="Simular" HorizontalAlignment="Left" Margin="472,938,0,0" VerticalAlignment="Top" Click="Simulation_Click" RenderTransformOrigin="-0.496,0.516" Width="88"/>
+        <ListView x:Name="list_escalonador" HorizontalAlignment="Left" Height="940" Margin="1095,30,0,0" VerticalAlignment="Top" Width="499"/>
+        <TextBox x:Name="input_process_time_begin" HorizontalAlignment="Left" Margin="206,876,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <TextBox HorizontalAlignment="Left" Margin="38,876,0,0" TextWrapping="Wrap" Text="Tempo de Inicio:" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0"/>
+        <TextBox HorizontalAlignment="Left" Margin="472,802,0,0" TextWrapping="Wrap" Text="Prioridade:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+        <TextBox x:Name="input_priority" HorizontalAlignment="Left" Margin="483,834,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+
     </Grid>
 </Page>

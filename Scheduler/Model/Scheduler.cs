@@ -19,27 +19,6 @@ namespace Scheduler.Model
             CPU = new Process();
             scheduler_type = 0;
             time = 0;
-
-            Process toTest;
-            toTest = new Process("Pages", 1, 33, 0, 0);
-            list_process.Add(toTest);
-            toTest = new Process("Keynote", 2, 20, 20, 0);
-            list_process.Add(toTest);
-
-            /*
-            Process toTest;
-            toTest = new Process("Pages", 33, 0, 0);
-            list_process.Add(toTest);
-            toTest = new Process("Keynote", 20, 20, 0);
-            list_process.Add(toTest);
-            toTest = new Process("Numbers", 50, 70, 1);
-            list_process.Add(toTest);
-            toTest = new Process("Word", 35, 22, 2);
-            list_process.Add(toTest);
-            toTest = new Process("Excel", 31, 210, 2);
-             Testes Rapidos
-            let Pages = Process(name: "Pages", id: 0, duration: 33, begin: 0, priority: 0)
-            */
         }
 
         public void add_process(String _name_, UInt16 _id_, UInt32 _duration_, UInt32 _begin_, UInt16 _priority_)
@@ -620,25 +599,23 @@ namespace Scheduler.Model
             int i = 0;
             time = 0;
 
-            for (int i = 0; i < list_process.Count; i++)
+            for (int j = 0; j < list_process.Count; j++)
             {
-                list_process[i].duration_simu = list_process[i].duration;
+                list_process[j].duration_simu = list_process[j].duration;
 
-                if (list_process[i].begin == 0)
+                if (list_process[j].begin == 0)
                 {
-                    process_run.Add(list_process[i]);
+                    process_run.Add(list_process[j]);
                 }
                 else
                 {
-                    process_to_start.Add(list_process[i]);
+                    process_to_start.Add(list_process[j]);
                 }
             }
 
             /* begin    end     id      name */
             Tuple<UInt32, UInt32, UInt16, String> toAdd;// = new Tuple<UInt32, UInt32, UInt16, String>(0, 0, 0, "");
-            UInt16 id_process = 0;
             UInt32 time_b = 0, time_f = 0;
-            String name_process = "";
             while (process_end.Count < list_process.Count)
             {
                 if (process_run.Count > 0)

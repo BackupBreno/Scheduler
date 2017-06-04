@@ -24,21 +24,81 @@ namespace Scheduler
     {
         private Model.Scheduler scheduler;
 
+        private List<Windows.UI.Xaml.Shapes.Rectangle> simulation_graph;
+        private Windows.UI.Xaml.Shapes.Rectangle rectangle;
+        private UInt16 counter;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             scheduler = new Model.Scheduler();
+            simulation_graph = new List<Windows.UI.Xaml.Shapes.Rectangle>();
+            rectangle = new Windows.UI.Xaml.Shapes.Rectangle();
+            counter = 0;
         }
 
-        private void output_task1_TextChanged(object sender, TextChangedEventArgs e)
+        private void Add_Process_Click(object sender, RoutedEventArgs e)
         {
+            if (String.Compare(input_process_name.Text, "") != 0 && String.Compare(input_process_duration.Text, "") != 0 && String.Compare(input_process_time_begin.Text, "") != 0 && String.Compare(input_priority.Text, "") != 0)
+            {
+                /* Adedando Processo na Lista de Processos */
+                scheduler.add_process(input_process_name.Text, counter++, UInt32.Parse(input_process_duration.Text), UInt32.Parse(input_process_time_begin.Text), UInt16.Parse(input_priority.Text));
 
+                /* Feedback */
+                String to_add = "Nome: " + input_process_name.Text + "\t | Duracao: " + input_process_duration.Text + "\t | Inicio: " + input_process_time_begin.Text;
+                output_list_process.Items.Add(to_add);
+
+                /* Clear Display */
+                input_process_name.Text = "";
+                input_process_duration.Text = "";
+                input_process_time_begin.Text = "";
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Simulation_Click(object sender, RoutedEventArgs e)
         {
-            scheduler.run();
+            List<Tuple<UInt32, UInt32, UInt16, String>> simulation_details;
+
+            simulation_details = scheduler.round_robin(10);
+
+            float scale;
+
+            if (scheduler.time >= (1080 - 30))
+                scale = scheduler.time / (1080 - 30);
+            else
+                scale = 1;
+
+            int j = 0;
+            for (int i = 0; i < simulation_details.Count; i++)
+            {
+                String details = "";
+
+                details = "Inicio: "
+                    + ((simulation_details.ElementAt(i).Item1 == 0) ? "0" : "")
+                    + ((simulation_details.ElementAt(i).Item1 < 100) ? "0" : "")
+                    + simulation_details.ElementAt(i).Item1 + "\t->\t";
+
+                details += "Fim: "
+                    + ((simulation_details.ElementAt(i).Item2 == 0) ? "0" : "")
+                    + ((simulation_details.ElementAt(i).Item2 < 100) ? "0" : "")
+                    + simulation_details.ElementAt(i).Item2 + "\t|\t";
+
+                details += simulation_details.ElementAt(i).Item4;
+
+                list_escalonador.Items.Add(details);
+
+                Windows.UI.Xaml.Shapes.Rectangle aux_rectangle = new Windows.UI.Xaml.Shapes.Rectangle();
+                aux_rectangle.HorizontalAlignment = HorizontalAlignment.Left;
+                aux_rectangle.VerticalAlignment = VerticalAlignment.Top;
+                aux_rectangle.Margin = new Thickness(simulation_details.ElementAt(i).Item1 * scale + 30, 500 + simulation_details.ElementAt(i).Item3 * 20, 0, 0);
+                aux_rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.SteelBlue);
+
+                aux_rectangle.Height = 19;
+                aux_rectangle.Width = (simulation_details.ElementAt(i).Item2 - simulation_details.ElementAt(i).Item1) * scale;
+
+                layout_root.Children.Add(aux_rectangle);
+            }
         }
     }
 }
