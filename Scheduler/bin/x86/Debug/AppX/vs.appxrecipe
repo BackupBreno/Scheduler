@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-04-18T14:53:33.128</Modified>
+      <Modified>2017-05-17T12:45:29.974</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Scheduler.exe">
       <PackagePath>entrypoint\Scheduler.exe</PackagePath>
-      <Modified>2017-04-18T14:53:31.906</Modified>
+      <Modified>2017-05-17T12:45:28.272</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\Microsoft.CSharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -341,7 +341,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Private.DataContractSerialization\4.1.2\lib\netstandard1.3\System.Private.DataContractSerialization.dll">
       <PackagePath>System.Private.DataContractSerialization.dll</PackagePath>
-      <Modified>2017-02-09T16:26:02.000</Modified>
+      <Modified>2017-02-09T15:26:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Private.ServiceModel\4.1.0\runtimes\win7\lib\netcore50\System.Private.ServiceModel.dll">
       <PackagePath>System.Private.ServiceModel.dll</PackagePath>
@@ -385,7 +385,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Runtime.Serialization.Json\4.0.3\lib\netcore50\System.Runtime.Serialization.Json.dll">
       <PackagePath>System.Runtime.Serialization.Json.dll</PackagePath>
-      <Modified>2017-02-09T16:26:02.000</Modified>
+      <Modified>2017-02-09T15:26:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Runtime.Serialization.Primitives\4.1.1\lib\netcore50\System.Runtime.Serialization.Primitives.dll">
       <PackagePath>System.Runtime.Serialization.Primitives.dll</PackagePath>
@@ -393,7 +393,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Runtime.Serialization.Xml\4.1.2\lib\netcore50\System.Runtime.Serialization.Xml.dll">
       <PackagePath>System.Runtime.Serialization.Xml.dll</PackagePath>
-      <Modified>2017-02-09T16:26:02.000</Modified>
+      <Modified>2017-02-09T15:26:02.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\System.Runtime.WindowsRuntime\4.0.11\runtimes\win8\lib\netstandard1.3\System.Runtime.WindowsRuntime.dll">
       <PackagePath>System.Runtime.WindowsRuntime.dll</PackagePath>
@@ -497,7 +497,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2017-04-18T14:15:33.542</Modified>
+      <Modified>2017-04-18T14:15:33.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -535,20 +535,20 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Scheduler.xr.xml">
       <PackagePath>Scheduler.xr.xml</PackagePath>
-      <Modified>2017-04-18T14:19:37.392</Modified>
+      <Modified>2017-05-04T12:00:32.842</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.15063.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
-      <Modified>2017-04-11T03:57:33.061</Modified>
+      <Modified>2017-04-26T21:21:35.194</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-04-18T14:53:32.707</Modified>
+      <Modified>2017-05-04T12:00:33.499</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Core\Scheduler.exe">
       <PackagePath>Scheduler.exe</PackagePath>
-      <Modified>2017-04-18T14:53:33.120</Modified>
+      <Modified>2017-05-17T12:45:29.959</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

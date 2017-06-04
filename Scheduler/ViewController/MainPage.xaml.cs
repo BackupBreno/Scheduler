@@ -22,9 +22,23 @@ namespace Scheduler
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private Model.Scheduler scheduler;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            scheduler = new Model.Scheduler();
+        }
+
+        private void output_task1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            scheduler.run();
         }
     }
 }

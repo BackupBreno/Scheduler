@@ -19,23 +19,31 @@ namespace Scheduler.Model
             scheduler_type = 0;
             time = 0;
 
-            /* Testes Rapidos
+            Process toTest;
+            toTest = new Process("Pages", 1, 33, 0, 0);
+            list_process.Add(toTest);
+            toTest = new Process("Keynote", 2, 20, 20, 0);
+            list_process.Add(toTest);
+
+            /*
+            Process toTest;
+            toTest = new Process("Pages", 33, 0, 0);
+            list_process.Add(toTest);
+            toTest = new Process("Keynote", 20, 20, 0);
+            list_process.Add(toTest);
+            toTest = new Process("Numbers", 50, 70, 1);
+            list_process.Add(toTest);
+            toTest = new Process("Word", 35, 22, 2);
+            list_process.Add(toTest);
+            toTest = new Process("Excel", 31, 210, 2);
+             Testes Rapidos
             let Pages = Process(name: "Pages", id: 0, duration: 33, begin: 0, priority: 0)
-            let Keynote = Process(name: "Keynote", id: 1, duration: 20, begin: 20, priority: 0)
-            let Numbers = Process(name: "Numbers", id: 2, duration: 50, begin: 70, priority: 1)
-            let Word = Process(name: "Word", id: 3, duration: 35, begin: 22, priority: 2)
-            let Excel = Process(name: "Excel", id: 4, duration: 31, begin: 210, priority: 2)
-            array_process.append(Pages)
-            array_process.append(Keynote)
-            array_process.append(Numbers)
-            array_process.append(Word)
-            array_process.append(Excel)
-             -------------- */
+            */
         }
 
-        public void add_process(String _name_, UInt32 _duration_, UInt32 _begin_, UInt16 _priority_)
+        public void add_process(String _name_, UInt16 _id_, UInt32 _duration_, UInt32 _begin_, UInt16 _priority_)
         {
-            Process toAdd = new Process(_name_, _duration_, _begin_, _priority_);
+            Process toAdd = new Process(_name_, _id_, _duration_, _begin_, _priority_);
             list_process.Add(toAdd);
         }
 
@@ -48,6 +56,11 @@ namespace Scheduler.Model
         public List<Tuple<UInt32, UInt32, UInt16, String>> run()
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
+
+            list_process[0].start();
+            list_process[0].stop();
+            System.Threading.Tasks.Task.Delay(1000);
+
             return details;
         }
         /* --- */
