@@ -35,7 +35,7 @@ namespace Scheduler
             scheduler = new Model.Scheduler();
             simulation_graph = new List<Windows.UI.Xaml.Shapes.Rectangle>();
             rectangle = new Windows.UI.Xaml.Shapes.Rectangle();
-            counter = 0;
+            counter = 1;
         }
 
         private void Add_Process_Click(object sender, RoutedEventArgs e)
@@ -54,13 +54,20 @@ namespace Scheduler
                 input_process_duration.Text = "";
                 input_process_time_begin.Text = "";
             }
+            else
+            {
+                scheduler.add_process("Word", 1, 123, 0, 0);
+                scheduler.add_process("Excel", 2, 23, 3, 0);
+                scheduler.add_process("Power", 3, 12, 15, 0);
+                scheduler.add_process("Note", 4, 32, 300, 0);
+            }
         }
 
         private void Simulation_Click(object sender, RoutedEventArgs e)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> simulation_details;
 
-            simulation_details = scheduler.round_robin(10);
+            simulation_details = scheduler.scheduler_by_priority_preemptive(10);
 
             float scale;
 

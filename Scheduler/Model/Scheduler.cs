@@ -33,29 +33,29 @@ namespace Scheduler.Model
         }
 
         /* Run */
-        public List<Tuple<UInt32, UInt32, UInt16, String>> run(UInt32 _timeSlice_)
+        public List<Tuple<UInt32, UInt32, UInt16, String>> run(UInt32 _timeSlice_, UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
 
             switch (scheduler_type)
             {
                 case 0:
-                    details = first_in_first_out_fifo();
+                    details = first_in_first_out_fifo(_latencia_);
                     break;
                 case 1:
-                    details = shortest_job_first_sjf();
+                    details = shortest_job_first_sjf(_latencia_);
                     break;
                 case 2:
-                    details = scheduler_by_priority_no_preemptive();
+                    details = scheduler_by_priority_no_preemptive(_latencia_);
                     break;
                 case 3:
-                    details = shortest_remaining_time_next_srtn();
+                    details = shortest_remaining_time_next_srtn(_latencia_);
                     break;
                 case 4:
-                    details = scheduler_by_priority_preemptive();
+                    details = scheduler_by_priority_preemptive(_latencia_);
                     break;
                 case 5:
-                    details = round_robin(_timeSlice_);
+                    details = round_robin(_timeSlice_, _latencia_);
                     break;
                 case 6:
                     details = multilevel();
@@ -67,12 +67,13 @@ namespace Scheduler.Model
         /* --- */
 
         /* Schedulers */
-        public List<Tuple<UInt32, UInt32, UInt16, String>> first_in_first_out_fifo()
+        public List<Tuple<UInt32, UInt32, UInt16, String>> first_in_first_out_fifo(UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
+            Process last_process = new Process();
             time = 0;
 
             for (int i = 0; i < list_process.Count; i++)
@@ -146,16 +147,26 @@ namespace Scheduler.Model
                         }
                     }
                 }
+
+                /* Latencia */
+                if (CPU.id != last_process.id)
+                {
+                    time += _latencia_;
+                }
+
+                last_process = CPU;
+
             }
 
             return details;
         }
-        public List<Tuple<UInt32, UInt32, UInt16, String>> shortest_job_first_sjf()
+        public List<Tuple<UInt32, UInt32, UInt16, String>> shortest_job_first_sjf(UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
+            Process last_process = new Process();
             time = 0;
 
             for (int i = 0; i < list_process.Count; i++)
@@ -241,16 +252,25 @@ namespace Scheduler.Model
                         }
                     }
                 }
+
+                /* Latencia */
+                if (CPU.id != last_process.id)
+                {
+                    time += _latencia_;
+                }
+
+                last_process = CPU;
             }
 
             return details;
         }
-        public List<Tuple<UInt32, UInt32, UInt16, String>> scheduler_by_priority_no_preemptive()
+        public List<Tuple<UInt32, UInt32, UInt16, String>> scheduler_by_priority_no_preemptive(UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
+            Process last_process = new Process();
             time = 0;
 
             for (int i = 0; i < list_process.Count; i++)
@@ -336,11 +356,19 @@ namespace Scheduler.Model
                         }
                     }
                 }
+
+                /* Latencia */
+                if (CPU.id != last_process.id)
+                {
+                    time += _latencia_;
+                }
+
+                last_process = CPU;
             }
 
             return details;
         }
-        public List<Tuple<UInt32, UInt32, UInt16, String>> shortest_remaining_time_next_srtn()
+        public List<Tuple<UInt32, UInt32, UInt16, String>> shortest_remaining_time_next_srtn(UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
@@ -401,6 +429,9 @@ namespace Scheduler.Model
 
                         toAdd = new Tuple<UInt32, UInt32, UInt16, String>(time_b, time_f, id_process, name_process);
                         details.Add(toAdd);
+
+                        /* Latencia */
+                        time += _latencia_;
 
                         id_process = CPU.id;
                         name_process = CPU.name;
@@ -463,13 +494,14 @@ namespace Scheduler.Model
             }
 
             return details;
-        }
-        public List<Tuple<UInt32, UInt32, UInt16, String>> scheduler_by_priority_preemptive()
+        } /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
+        public List<Tuple<UInt32, UInt32, UInt16, String>> scheduler_by_priority_preemptive(UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
+            Process last_process_latencia = new Process();
             Process last_process = new Process();
             Boolean isFirst = true;
             time = 0;
@@ -525,6 +557,9 @@ namespace Scheduler.Model
 
                         toAdd = new Tuple<UInt32, UInt32, UInt16, String>(time_b, time_f, id_process, name_process);
                         details.Add(toAdd);
+
+                        /* Latencia */
+                        time += _latencia_;
 
                         id_process = CPU.id;
                         name_process = CPU.name;
@@ -584,11 +619,19 @@ namespace Scheduler.Model
                         }
                     }
                 }
+
+                /* Latencia */
+                if (CPU.id != last_process_latencia.id)
+                {
+                    time += _latencia_;
+                }
+
+                last_process_latencia = CPU;
             }
 
             return details;
-        }
-        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_)
+        } /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
+        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_, UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
@@ -679,10 +722,18 @@ namespace Scheduler.Model
                         }
                     }
                 }
+
+                /* Latencia */
+                if (CPU.id != last_process.id)
+                {
+                    time += _latencia_;
+                }
+
+                last_process = CPU;
             }
 
             return details;
-        }
+        } /* Falta Latencia */
         public List<Tuple<UInt32, UInt32, UInt16, String>> multilevel()
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
