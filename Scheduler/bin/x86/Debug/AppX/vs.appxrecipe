@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-06-07T21:19:25.549</Modified>
+      <Modified>2017-06-07T21:48:26.626</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Scheduler.exe">
       <PackagePath>entrypoint\Scheduler.exe</PackagePath>
-      <Modified>2017-06-07T21:19:25.160</Modified>
+      <Modified>2017-06-07T21:48:26.283</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\.nuget\packages\Microsoft.CSharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -548,7 +548,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Breno Aquino\iCloudDrive\Projetos\Disciplinas\Sistemas Operacionais\Scheduler\Scheduler\bin\x86\Debug\Core\Scheduler.exe">
       <PackagePath>Scheduler.exe</PackagePath>
-      <Modified>2017-06-07T21:19:25.545</Modified>
+      <Modified>2017-06-07T21:48:26.620</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -66,6 +66,19 @@ namespace Scheduler
         private void Simulation_Click(object sender, RoutedEventArgs e)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> simulation_details;
+            List<Windows.UI.Color> colors = new List<Windows.UI.Color>();
+
+            colors.Add(Windows.UI.Color.FromArgb(255, 0, 0, 0));
+            colors.Add(Windows.UI.Color.FromArgb(255, 0, 0, 255));
+            colors.Add(Windows.UI.Color.FromArgb(255, 0, 255, 0));
+            colors.Add(Windows.UI.Color.FromArgb(255, 255, 0, 0));
+
+            colors.Add(Windows.UI.Color.FromArgb(255, 255, 0, 255));
+            colors.Add(Windows.UI.Color.FromArgb(255, 0, 255, 255));
+            colors.Add(Windows.UI.Color.FromArgb(255, 255, 255, 255));
+
+            colors.Add(Windows.UI.Color.FromArgb(255, 100, 100, 100));
+            colors.Add(Windows.UI.Color.FromArgb(255, 0, 100, 255));
 
             simulation_details = scheduler.round_robin(10, 10);
 
@@ -76,7 +89,11 @@ namespace Scheduler
             else
                 scale = 1;
 
-            int j = 0;
+            for (int i = 0; i < simulation_graph.Count; i++)
+            {
+                layout_root.Children.Remove(simulation_graph[i]);
+            }
+
             for (int i = 0; i < simulation_details.Count; i++)
             {
                 String details = "";
@@ -99,12 +116,22 @@ namespace Scheduler
                 aux_rectangle.HorizontalAlignment = HorizontalAlignment.Left;
                 aux_rectangle.VerticalAlignment = VerticalAlignment.Top;
                 aux_rectangle.Margin = new Thickness(simulation_details.ElementAt(i).Item1 * scale + 30, 500 + simulation_details.ElementAt(i).Item3 * 20, 0, 0);
-                aux_rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.SteelBlue);
+                // aux_rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.SteelBlue);
+                
+                if (simulation_details[i].Item3 >= colors.Count)
+                {
+                    aux_rectangle.Fill = new SolidColorBrush(colors[simulation_details[i].Item3 + 1 - colors.Count]);
+                }
+                else
+                {
+                    aux_rectangle.Fill = new SolidColorBrush(colors[simulation_details[i].Item3]);
+                }
 
                 aux_rectangle.Height = 19;
                 aux_rectangle.Width = (simulation_details.ElementAt(i).Item2 - simulation_details.ElementAt(i).Item1) * scale;
 
-                layout_root.Children.Add(aux_rectangle);
+                simulation_graph.Add(aux_rectangle);
+                layout_root.Children.Add(simulation_graph[simulation_graph.Count - 1]);
             }
         }
     }
