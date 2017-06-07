@@ -67,7 +67,7 @@ namespace Scheduler
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> simulation_details;
 
-            simulation_details = scheduler.scheduler_by_priority_preemptive(10);
+            simulation_details = scheduler.round_robin(10, 10);
 
             float scale;
 

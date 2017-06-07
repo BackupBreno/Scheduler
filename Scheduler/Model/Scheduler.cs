@@ -631,14 +631,13 @@ namespace Scheduler.Model
 
             return details;
         } /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
-        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_, UInt32 _latencia_)
+        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_, UInt32 _latencia_) /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
             Process last_process = new Process();
-            Boolean isFirst = true;
             int i = 0;
             time = 0;
 
@@ -656,14 +655,23 @@ namespace Scheduler.Model
                 }
             }
 
-            /* begin    end     id      name */
-            Tuple<UInt32, UInt32, UInt16, String> toAdd;// = new Tuple<UInt32, UInt32, UInt16, String>(0, 0, 0, "");
+                /* begin    end     id      name */
+            Tuple<UInt32, UInt32, UInt16, String> toAdd;
             UInt32 time_b = 0, time_f = 0;
             while (process_end.Count < list_process.Count)
             {
                 if (process_run.Count > 0)
                 {
                     CPU = process_run[i];
+
+                    /* Latencia */
+                    if (CPU.id != last_process.id)
+                    {
+                        time += _latencia_;
+                    }
+
+                    last_process = CPU;
+                    /* -------- */
 
                     time_b = time;
                     if (CPU.duration_simu > _timeSlice_)
@@ -722,14 +730,6 @@ namespace Scheduler.Model
                         }
                     }
                 }
-
-                /* Latencia */
-                if (CPU.id != last_process.id)
-                {
-                    time += _latencia_;
-                }
-
-                last_process = CPU;
             }
 
             return details;
