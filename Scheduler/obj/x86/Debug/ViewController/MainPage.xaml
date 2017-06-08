@@ -9,18 +9,51 @@
 
     <Grid x:ConnectionId='1' x:Name="layout_root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Button x:ConnectionId='2' x:Name="Add_Process" Content="Adicionar Processo" HorizontalAlignment="Left" Margin="153,938,0,0" VerticalAlignment="Top"                          />
-        <TextBox x:ConnectionId='3' x:Name="input_process_name" HorizontalAlignment="Left" Margin="206,802,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <TextBox x:ConnectionId='4' x:Name="input_process_duration" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="206,839,0,0" Width="200"/>
-        <TextBox HorizontalAlignment="Left" Margin="38,802,0,0" TextWrapping="Wrap" Text="Nome do Processo:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
-        <TextBox HorizontalAlignment="Left" Margin="38,839,0,0" TextWrapping="Wrap" Text="Duração:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
-        <ListView x:ConnectionId='5' x:Name="output_list_process" HorizontalAlignment="Left" Height="444" Margin="38,30,0,0" VerticalAlignment="Top" Width="576"/>
-        <Button x:ConnectionId='6' x:Name="Simulation" Content="Simular" HorizontalAlignment="Left" Margin="472,938,0,0" VerticalAlignment="Top"                          RenderTransformOrigin="-0.496,0.516" Width="88"/>
-        <ListView x:ConnectionId='7' x:Name="list_escalonador" HorizontalAlignment="Left" Height="940" Margin="1095,30,0,0" VerticalAlignment="Top" Width="499"/>
-        <TextBox x:ConnectionId='8' x:Name="input_process_time_begin" HorizontalAlignment="Left" Margin="206,876,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Left" Margin="38,876,0,0" TextWrapping="Wrap" Text="Tempo de Inicio:" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0"/>
-        <TextBox HorizontalAlignment="Left" Margin="472,802,0,0" TextWrapping="Wrap" Text="Prioridade:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
-        <TextBox x:ConnectionId='9' x:Name="input_priority" HorizontalAlignment="Left" Margin="483,834,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <ListView x:ConnectionId='2' x:Name="output_list_process" HorizontalAlignment="Left" Height="444" Margin="38,30,0,0" VerticalAlignment="Top" Width="976"/>
+        <ListView x:ConnectionId='3' x:Name="list_escalonador" HorizontalAlignment="Left" Height="940" Margin="1095,30,0,0" VerticalAlignment="Top" Width="499"/>
+
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,802,0,0" Orientation="Horizontal">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical" BorderThickness="1" BorderBrush="DimGray">
+                <TextBlock Text="Menu de Processos" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 10, 0, 10" />
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nome do Processo:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+                        <TextBox Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Duração:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+                        <TextBox Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tempo de Inicio:" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox x:ConnectionId='10' x:Name="input_process_name" Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+                        <TextBox x:ConnectionId='11' x:Name="input_process_duration" Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+                        <TextBox x:ConnectionId='12' x:Name="input_process_time_begin" Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical" Margin="25, 0, 0, 0">
+                        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="Prioridade:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+                        <TextBox x:ConnectionId='9' x:Name="input_priority" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:ConnectionId='8' x:Name="Add_Process" Content="Adicionar Processo" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center"                          />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="25, 0, 0, 0" BorderThickness="1" BorderBrush="DimGray">
+                <TextBlock Text="Menu de Simulação" Margin="10, 10, 10, 10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock Text="Escalonador:" Margin="0, 0, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ComboBox x:ConnectionId='7' Margin="5, 0, 0, 0"  x:Name="input_scheduler" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <StackPanel Orientation="Vertical">
+                            <TextBox Margin="0, 5, 0, 0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TimeSlice:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+                            <TextBox Margin="0, 5, 0, 0" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Latência:" VerticalAlignment="Top" BorderThickness="0" IsReadOnly="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBox x:ConnectionId='5' x:Name="input_timeslice" Margin="0, 5, 5, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75"/>
+                            <TextBox x:ConnectionId='6' x:Name="input_latency" Margin="0, 5, 0, 0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <Button x:ConnectionId='4' x:Name="Simulation" Content="Simular" Margin="0, 10, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center"                          RenderTransformOrigin="-0.496,0.516" Width="88"/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Page>

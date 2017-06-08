@@ -36,6 +36,17 @@ namespace Scheduler
             simulation_graph = new List<Windows.UI.Xaml.Shapes.Rectangle>();
             rectangle = new Windows.UI.Xaml.Shapes.Rectangle();
             counter = 1;
+            input_latency.Text = "0";
+            input_timeslice.Text = "0";
+
+            input_scheduler.Items.Insert(0, "FIFO");
+            input_scheduler.Items.Insert(1, "SJF");
+            input_scheduler.Items.Insert(2, "PRIORIDADE S/ PREEMPÇÃO");
+            input_scheduler.Items.Insert(3, "PRIORIDADE C/ PREEMPÇÃO");
+            input_scheduler.Items.Insert(4, "SRTN");
+            input_scheduler.Items.Insert(5, "ROUND ROBIN");
+            input_scheduler.Items.Insert(6, "MULTILEVEL");
+            input_scheduler.SelectedIndex = 0;
         }
 
         private void Add_Process_Click(object sender, RoutedEventArgs e)
@@ -68,6 +79,8 @@ namespace Scheduler
             List<Tuple<UInt32, UInt32, UInt16, String>> simulation_details;
             List<Windows.UI.Color> colors = new List<Windows.UI.Color>();
 
+            list_escalonador.Items.Clear();
+
             colors.Add(Windows.UI.Color.FromArgb(255, 0, 0, 0));
             colors.Add(Windows.UI.Color.FromArgb(255, 0, 0, 255));
             colors.Add(Windows.UI.Color.FromArgb(255, 0, 255, 0));
@@ -80,7 +93,7 @@ namespace Scheduler
             colors.Add(Windows.UI.Color.FromArgb(255, 100, 100, 100));
             colors.Add(Windows.UI.Color.FromArgb(255, 0, 100, 255));
 
-            simulation_details = scheduler.round_robin(10, 10);
+            simulation_details = scheduler.run(input_scheduler.SelectedIndex, UInt32.Parse(input_timeslice.Text), UInt32.Parse(input_latency.Text));
 
             float scale;
 
@@ -96,8 +109,8 @@ namespace Scheduler
 
             for (int i = 0; i < simulation_details.Count; i++)
             {
+                /* ListView */
                 String details = "";
-
                 details = "Inicio: "
                     + ((simulation_details.ElementAt(i).Item1 == 0) ? "0" : "")
                     + ((simulation_details.ElementAt(i).Item1 < 100) ? "0" : "")
@@ -111,13 +124,16 @@ namespace Scheduler
                 details += simulation_details.ElementAt(i).Item4;
 
                 list_escalonador.Items.Add(details);
+                /* ----- */
 
+                /* Grafico */
+                /* OBS: Item1 = Tempo de Entrada ; Item2 = Tempo de Saida ; Item3 = ID (unico para cada processo: 1..2..3..4..) ; Item4 = Nome do Processo*/
                 Windows.UI.Xaml.Shapes.Rectangle aux_rectangle = new Windows.UI.Xaml.Shapes.Rectangle();
                 aux_rectangle.HorizontalAlignment = HorizontalAlignment.Left;
                 aux_rectangle.VerticalAlignment = VerticalAlignment.Top;
-                aux_rectangle.Margin = new Thickness(simulation_details.ElementAt(i).Item1 * scale + 30, 500 + simulation_details.ElementAt(i).Item3 * 20, 0, 0);
-                // aux_rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.SteelBlue);
-                
+                aux_rectangle.Margin = new Thickness(simulation_details.ElementAt(i).Item1 * scale + 30, 500 + simulation_details.ElementAt(i).Item3 * 20, 0, 0); /* Coordenadas */
+
+                /* Seta a cor do processo, se passar da quantidade armazenada volta pra primeira (so o primeiro overflow) */
                 if (simulation_details[i].Item3 >= colors.Count)
                 {
                     aux_rectangle.Fill = new SolidColorBrush(colors[simulation_details[i].Item3 + 1 - colors.Count]);
@@ -127,11 +143,14 @@ namespace Scheduler
                     aux_rectangle.Fill = new SolidColorBrush(colors[simulation_details[i].Item3]);
                 }
 
+                /* Tamanho do retangulo baseado no tempo de entrada e saida */
                 aux_rectangle.Height = 19;
                 aux_rectangle.Width = (simulation_details.ElementAt(i).Item2 - simulation_details.ElementAt(i).Item1) * scale;
 
+                /* Exibe o retangulo */
                 simulation_graph.Add(aux_rectangle);
                 layout_root.Children.Add(simulation_graph[simulation_graph.Count - 1]);
+                /* ----- */
             }
         }
     }

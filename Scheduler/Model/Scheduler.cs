@@ -11,13 +11,11 @@ namespace Scheduler.Model
         public List<Process> list_process { get; set; }
         public Process CPU { get; set; }
         public UInt32 time { get; set; }
-        public UInt16 scheduler_type { get; set; }
 
         public Scheduler()
         {
             list_process = new List<Process>();
             CPU = new Process();
-            scheduler_type = 0;
             time = 0;
         }
 
@@ -33,11 +31,11 @@ namespace Scheduler.Model
         }
 
         /* Run */
-        public List<Tuple<UInt32, UInt32, UInt16, String>> run(UInt32 _timeSlice_, UInt32 _latencia_)
+        public List<Tuple<UInt32, UInt32, UInt16, String>> run(int _scheduler_type_, UInt32 _timeSlice_, UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
 
-            switch (scheduler_type)
+            switch (_scheduler_type_)
             {
                 case 0:
                     details = first_in_first_out_fifo(_latencia_);
@@ -49,10 +47,10 @@ namespace Scheduler.Model
                     details = scheduler_by_priority_no_preemptive(_latencia_);
                     break;
                 case 3:
-                    details = shortest_remaining_time_next_srtn(_latencia_);
+                    details = scheduler_by_priority_preemptive(_latencia_);
                     break;
                 case 4:
-                    details = scheduler_by_priority_preemptive(_latencia_);
+                    details = shortest_remaining_time_next_srtn(_latencia_);
                     break;
                 case 5:
                     details = round_robin(_timeSlice_, _latencia_);
@@ -631,13 +629,14 @@ namespace Scheduler.Model
 
             return details;
         } /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
-        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_, UInt32 _latencia_) /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
+        public List<Tuple<UInt32, UInt32, UInt16, String>> round_robin(UInt32 _timeSlice_, UInt32 _latencia_)
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
             List<Process> process_run = new List<Process>();
             List<Process> process_to_start = new List<Process>();
             List<Process> process_end = new List<Process>();
             Process last_process = new Process();
+            Boolean isFirst = true;
             int i = 0;
             time = 0;
 
@@ -665,11 +664,12 @@ namespace Scheduler.Model
                     CPU = process_run[i];
 
                     /* Latencia */
-                    if (CPU.id != last_process.id)
+                    if (CPU.id != last_process.id && !isFirst)
                     {
                         time += _latencia_;
                     }
 
+                    isFirst = false;
                     last_process = CPU;
                     /* -------- */
 
@@ -733,7 +733,7 @@ namespace Scheduler.Model
             }
 
             return details;
-        } /* Falta Latencia */
+        } /* Latencia - talvez nao faca a troca antes (postulado do Herleson) */
         public List<Tuple<UInt32, UInt32, UInt16, String>> multilevel()
         {
             List<Tuple<UInt32, UInt32, UInt16, String>> details = new List<Tuple<UInt32, UInt32, UInt16, String>>();
